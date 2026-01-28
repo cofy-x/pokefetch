@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# Define directories
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ASSETS_DIR="$SCRIPT_DIR/assets"
+POKEMON_DIR="$ASSETS_DIR/pokemon"
+QUOTES_FILE="$ASSETS_DIR/quotes.txt"
+
+# Check if pokemon directory exists
+if [ ! -d "$POKEMON_DIR" ]; then
+    echo "Error: 'assets/pokemon' directory not found."
+    exit 1
+fi
+
+# Collect all .txt files
+files=("$POKEMON_DIR"/*.txt)
+num_files=${#files[@]}
+
+if [ -e "${files[0]}" ]; then
+    # 1. Select Random File
+    random_index=$((RANDOM % num_files))
+    selected_file="${files[$random_index]}"
+
+    # 2. Print Image with Indentation (2 spaces)
+    echo "" 
+    while IFS= read -r line; do
+        echo "  $line"
+    done < "$selected_file"
+
+else
+    echo "No Pokémon found in $POKEMON_DIR"
+fi
+
+# 3. --- RANDOM QUOTE DISPLAY ---
+
+if [ -f "$QUOTES_FILE" ] && [ -s "$QUOTES_FILE" ]; then
+    total_quotes=$(grep -c . "$QUOTES_FILE")
+    
+    if [ "$total_quotes" -gt 0 ]; then
+        q_index=$(( ( RANDOM % total_quotes ) + 1 ))
+        
+        # Extract line and remove Carriage Return (\r) just in case
+        quote=$(sed "${q_index}q;d" "$QUOTES_FILE" | tr -d '\r')
+        
+        # Added spaces inside quotes " $quote " to prevent rendering glitches
+        echo -e "\n  \033[3m\033[90m“ $quote ”\033[0m\n"
+    fi
+fi

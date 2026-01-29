@@ -25,7 +25,13 @@ echo -e "${BLUE}📦 Cloning repository from GitHub...${NC}"
 git clone --depth=1 "$REPO_URL" "$INSTALL_DIR"
 
 # 3. Set permissions
-chmod +x "$INSTALL_DIR/pokefetch"
+# Check if file exists before chmod to avoid errors
+if [ -f "$INSTALL_DIR/pokefetch" ]; then
+    chmod +x "$INSTALL_DIR/pokefetch"
+else
+    echo -e "${RED}❌ Error: Executable not found!${NC}"
+    exit 1
+fi
 
 # 4. Detect Shell and configure
 SHELL_CONFIG=""
@@ -64,5 +70,12 @@ if [ -n "$SHELL_CONFIG" ]; then
 fi
 
 echo -e "${GREEN}🎉 Installation Complete!${NC}"
-echo -e "Restart your terminal or run 'source $SHELL_CONFIG' to see your first Pokémon."
-echo -e "Tip: You can also type '${BLUE}pokefetch${NC}' manually at any time."
+echo -e "It will run automatically when you open a new tab."
+echo -e "Or type '${BLUE}pokefetch${NC}' manually."
+
+# --- ✨ IMMEDIATE SHOWCASE ✨ ---
+echo -e "\n${BLUE}Here is your first Pokémon:${NC}"
+echo ""
+# Run the installed binary directly using absolute path
+# (Because the PATH update hasn't taken effect in this shell session yet)
+"$INSTALL_DIR/pokefetch"

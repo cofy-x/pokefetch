@@ -56,6 +56,12 @@ Want to add a missing Pokémon or your own custom art?
 
 3. That's it! It will now appear in the random rotation.
 
+## 🧰 How the bundled art was made
+
+The bundled ANSI assets were generated with [`cofy-x/pixel-to-ascii`](https://github.com/cofy-x/pixel-to-ascii) from the Pokémon icon sprites in PokeAPI's [`sprites/pokemon/versions/generation-viii/icons`](https://github.com/PokeAPI/sprites/tree/master/sprites/pokemon/versions/generation-viii/icons) directory.
+
+`pokefetch` is an unofficial fan project and is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures, or The Pokémon Company. Pokémon names, characters, artwork, and related trademarks belong to their respective owners. See [Third-Party Notices](./THIRD_PARTY_NOTICES.md) for the source and licensing boundary of the bundled assets.
+
 ## 🗑 Uninstall
 
 To completely remove `pokefetch` and clean up your shell configuration automatically:
@@ -66,7 +72,7 @@ To completely remove `pokefetch` and clean up your shell configuration automatic
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE)
+The `pokefetch` scripts and original project documentation are licensed under the [MIT License](./LICENSE). The bundled Pokémon-derived ANSI assets are third-party material and are not relicensed under MIT; see [Third-Party Notices](./THIRD_PARTY_NOTICES.md).
 
 ---
 
